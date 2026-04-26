@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Exclusive Member Access"
+version = "1.0.0"
+id = "artifacts/exclusive-auth"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21488
+
+[services.development]
+run = "pnpm --filter @workspace/exclusive-auth run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/exclusive-auth", "run", "build" ]
+publicDir = "artifacts/exclusive-auth/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21488"
+BASE_PATH = "/"
