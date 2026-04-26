@@ -53,18 +53,18 @@ export const BackgroundFX: FC = () => {
   );
 };
 
-export const BrandMark: FC = () => {
+export const BrandMark: FC<{ message?: string }> = ({ message }) => {
   return (
     <div className="flex flex-col items-center mb-8 space-y-4">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.6 }}
-        className="flex items-center gap-3"
+        className="flex flex-col items-center gap-4 text-center"
       >
-        <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-white/[0.03] border border-white/10 shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+        <div className="relative flex items-center justify-center w-12 h-12 rounded-xl bg-white/[0.03] border border-white/10 shadow-[0_0_20px_rgba(139,92,246,0.35)]">
           <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-blue-600/20 to-purple-600/20 blur-md z-[-1]" />
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="url(#paint0_linear)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="url(#paint0_linear)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <defs>
               <linearGradient id="paint0_linear" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
                 <stop stopColor="#60A5FA" />
@@ -76,11 +76,13 @@ export const BrandMark: FC = () => {
             <polyline points="2 12 12 17 22 12" />
           </svg>
         </div>
-        <span className="text-2xl font-bold tracking-[0.2em] uppercase bg-gradient-to-r from-white via-white to-white/60 bg-clip-text text-transparent">
-          Aura
-        </span>
+        {message && (
+          <p className="max-w-md text-sm sm:text-base leading-relaxed font-medium bg-gradient-to-r from-white via-purple-100 to-white/70 bg-clip-text text-transparent px-2">
+            {message}
+          </p>
+        )}
       </motion.div>
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
@@ -95,13 +97,13 @@ export const BrandMark: FC = () => {
   );
 };
 
-export const AuthLayout: FC<{ children: ReactNode }> = ({ children }) => {
+export const AuthLayout: FC<{ children: ReactNode; brandMessage?: string }> = ({ children, brandMessage }) => {
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center p-4 sm:p-8 font-sans bg-background text-foreground dark selection:bg-purple-500/30">
       <BackgroundFX />
       
       <div className="w-full max-w-md relative z-10">
-        <BrandMark />
+        <BrandMark message={brandMessage} />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

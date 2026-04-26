@@ -44,17 +44,16 @@ export default function Register() {
 
   const { isSubmitting } = form.formState;
 
-  const onSubmit = async (data: RegisterFormValues) => {
-    // Simulate API call
+  const onSubmit = async (_data: RegisterFormValues) => {
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    toast.success("Application received.", {
-      description: "We'll review your request to join Aura shortly.",
+    toast.success("Pendaftaran terkirim.", {
+      description: "Permintaan akses member eksklusif Anda akan segera ditinjau.",
     });
     setLocation("/");
   };
 
   return (
-    <AuthLayout>
+    <AuthLayout brandMessage="daftar ke akun member ekslusif di ABANGADEKganteng khusus untuk fitur member ekslusif yang tidak bisa di dapatkan oleh member biasanya">
       <motion.div
         variants={{
           hidden: { opacity: 0 },

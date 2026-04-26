@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -23,7 +23,6 @@ const loginSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function Login() {
-  const [, setLocation] = useLocation();
   const [showPassword, setShowPassword] = useState(false);
   
   const form = useForm<LoginFormValues>({
@@ -37,16 +36,17 @@ export default function Login() {
 
   const { isSubmitting } = form.formState;
 
-  const onSubmit = async (data: LoginFormValues) => {
-    // Simulate API call
+  const onSubmit = async (_data: LoginFormValues) => {
     await new Promise((resolve) => setTimeout(resolve, 1200));
-    toast.success("Welcome back, member.", {
-      description: "Successfully authenticated to Aura.",
+    toast.success("Login berhasil", {
+      description: "Mengarahkan ke area member eksklusif...",
     });
+    await new Promise((resolve) => setTimeout(resolve, 600));
+    window.location.href = "https://adminsecretmod.netlify.app";
   };
 
   return (
-    <AuthLayout>
+    <AuthLayout brandMessage="login ke akun member ekslusif di ABANGADEKganteng khusus untuk fitur member ekslusif yang tidak bisa di dapatkan oleh member biasanya">
       <motion.div
         variants={{
           hidden: { opacity: 0 },
