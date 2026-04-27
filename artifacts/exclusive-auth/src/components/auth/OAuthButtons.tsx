@@ -4,10 +4,21 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 
-export const OAuthButtons: FC<{ disabled?: boolean }> = ({ disabled }) => {
-  const handleOAuth = (provider: string) => {
-    toast(`Connecting to ${provider}...`);
-  };
+const handleOAuth = (provider: string) => {
+  if (provider === "Google") {
+    window.location.href =
+      `https://accounts.google.com/o/oauth2/v2/auth?client_id=${import.meta.env.VITE_GOOGLE_CLIENT_ID}&redirect_uri=https://blacki-imut.github.io/Members-eklusif/&response_type=token&scope=email profile`;
+    return;
+  }
+
+  if (provider === "GitHub") {
+    window.location.href =
+      `https://github.com/login/oauth/authorize?client_id=${import.meta.env.VITE_GITHUB_CLIENT_ID}&scope=user:email`;
+    return;
+  }
+
+  toast(`Connecting to ${provider}...`);
+};
 
   return (
     <div className="flex flex-col gap-3 w-full">
